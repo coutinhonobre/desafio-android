@@ -30,4 +30,20 @@ class ExampleServiceTest {
         // then
         assertEquals(users, expectedUsers)
     }
+
+    @Test
+    fun listUsers() {
+        // given
+        val call = mock<Call<List<User>>>()
+        val expectedUsers = mutableListOf(User(id = 1, name = "igor", username = "coutinho", img = ""))
+
+        whenever(call.execute()).thenReturn(Response.success(expectedUsers))
+        whenever(api.getUsers()).thenReturn(call)
+
+        // when
+        val users = service.example()
+
+        // then
+        assertEquals(users, expectedUsers)
+    }
 }
